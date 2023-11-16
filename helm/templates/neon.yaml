@@ -1,5 +1,5 @@
 # This is only used in dev mode, where "branchName" is defined
-{{ -  if and .Values.neon.branchName (ne .Values.neon.projectId "") }}
+{{-  if and .Values.neon.branchName (ne .Values.neon.projectId "") }}
 apiVersion: neon.tech/v1alpha1
 kind: Branch
 metadata:

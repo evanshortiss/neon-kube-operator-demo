@@ -2,6 +2,21 @@
 
 NOTE: You need to run the [neon-kube-operator](https://github.com/evanshortiss/neon-kube-operator) locally for this demo (at present!)
 
+```bash
+git clone git@github.com:evanshortiss/neon-kube-operator.git
+cd neon-kube-operator
+
+# Create namespace and a secret containing a Neon API Key
+kubectl create namespace neon-operator
+kubectl create secret generic neon-operator-secrets \
+--from-literal=neon-api-key=$NEON_API_KEY \
+-n neon-operator
+
+# Install the operator's CRDs into the kubernetes cluster
+# and run the operator in your local environment
+make install run
+```
+
 ## Prerequisites
 
 * Kubernetes cluster with Argo CD installed and exposed via an HTTPS ingress.
