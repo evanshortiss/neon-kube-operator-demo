@@ -1,0 +1,56 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nkp-operator-demo
+  namespace: argocd
+spec:
+  generators:
+  - pullRequest:
+      github:
+        owner: evanshortiss
+        repo: neon-kube-operator-demo
+        # Optional. Only create previews for a PR with the given label(s)
+        # labels:
+        #  - preview
+  # Don't override the settings applied by GH Actions CI post-creation
+  # of the Argo CD Application for the PR. This should not be necessary
+  # once https://github.com/argoproj/argo-cd/pull/14743 lands in stable.
+  # After that PR lands, ignoreApplicationDifferences should be sufficient
+  # syncPolicy:
+  #   applicationsSync: create-delete
+  # We need to tell Argo CD to ignore differences/drift in the Application's
+  # Helm values. This is because our GitHub Ations CI pipeline will override
+  # the container image values, and database url with a Neon preview branch.
+  # If we didn't explicitly ignore those changes, Argo CD would wipe them away,
+  # as you'd want it to under normal circumstances!
+  ignoreApplicationDifferences:
+  - jqPathExpressions:
+    - .spec.source.helm.parameters
+  template:
+    metadata:
+      name: 'nkp-pr-{{number}}'
+    spec:
+      source:
+        path: helm/
+        repoURL: 'https://github.com/evanshortiss/neon-kube-operator-demo'
+        targetRevision: '{{head_sha}}'
+        helm:
+          valueFiles:
+          - values.yaml
+          parameters:
+          - name: deployment.image.tag
+            value: "{{head_sha}}"
+          - name: ingress.domain
+            value: "pr-{{number}}.nkp.ngrok.app"
+          - name: neon.branchName
+            value: "pr-{{number}}"
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'nkp-pr-{{number}}'

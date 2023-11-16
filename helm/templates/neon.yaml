@@ -1,0 +1,19 @@
+# This is only used in dev mode, where "branchName" is defined
+{{ -  if and .Values.neon.branchName (ne .Values.neon.projectId "") }}
+apiVersion: neon.tech/v1alpha1
+kind: Branch
+metadata:
+  name: {{ Values.neon.branchName }}
+spec:
+  projectId: {{ .Values.neon.projectId }}
+---
+apiVersion: neon.tech/v1alpha1
+kind: Endpoint
+metadata:
+  labels:
+  name: endpoint-sample
+spec:
+  from: 
+    branchRef: {{ Values.neon.branchName }}
+  type: read_write
+{{- end }}

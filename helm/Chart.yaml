@@ -1,0 +1,6 @@
+apiVersion: v2
+name: node-preview
+type: application
+description: A Helm chart to deploy a Node.js application that connects to a Postgres database provied by Neon
+version: 0.1.0
+appVersion: "1.16.0"

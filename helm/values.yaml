@@ -1,0 +1,30 @@
+
+deployment:
+  replicaCount: 1
+  port: 3000
+  image:
+    repository: docker.io/evanshortiss/neon-kube-previews
+    pullPolicy: Always
+    tag: latest
+  resources:
+    limits:
+      # Lower resources for development vs production
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+database: {}
+service:
+  port: 80
+labels:
+  app: neon-kube-previews
+  environment: "development"
+ingress:
+  domain: neon.ngrok.app
+neon:
+  projectId: snowy-moon-40889006
+  # This will be overwritten by the ApplicationSet with a PR number
+  branchName: dev
+

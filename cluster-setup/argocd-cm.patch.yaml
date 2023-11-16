@@ -1,0 +1,10 @@
+data:
+  # This patch might not be necessary. It depends on your chosen ingress type.
+  # Since this example uses ngrok, the patch is required to prevent Argo CD
+  # applications getting stuck waiting for the ingress status to update
+  resource.customizations: |
+    networking.k8s.io/Ingress:
+      health.lua: |
+        hs = {}
+        hs.status = "Healthy"
+        return hs
