@@ -1,5 +1,7 @@
 # Kube Preview Environments with Neon Database Operator
 
+NOTE: You need to run the [neon-kube-operator](https://github.com/evanshortiss/neon-kube-operator) locally for this demo (at present!)
+
 ## Prerequisites
 
 * Kubernetes cluster with Argo CD installed and exposed via an HTTPS ingress.
@@ -20,11 +22,7 @@ your new repository's settings screen:
 
 * `DOCKERHUB_USERNAME` - Your Docker Hub username.
 * `DOCKERHUB_TOKEN` - A token generated [Account Settings](https://hub.docker.com/settings/security) on Docker Hub.
-* `NEON_API_KEY` - Found in the [Developer Settings](https://console.neon.tech/app/settings/api-keys) screen on the Neon console.
-* `NEON_PROJECT_ID` - Found in *Settings > General* on the Neon project dashboard.
 * `ARGOCD_HOSTNAME` - Strictly the hostname, e.g `argocd.foo.bar` without `https`.
-* `ARGOCD_USERNAME` - A valid Argo CD username. You can could use `admin` if you're prototyping.
-* `ARGOCD_PASSWORD` - The password associated with the given `ARGOCD_USERNAME`.
 
 The following secret is optional. It's used to generate a preview URL
 provided by [ngrok](https://ngrok.io), and assumes you've installed the 
