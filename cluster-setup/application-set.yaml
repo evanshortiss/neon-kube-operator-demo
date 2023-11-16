@@ -23,9 +23,9 @@ spec:
   # the container image values, and database url with a Neon preview branch.
   # If we didn't explicitly ignore those changes, Argo CD would wipe them away,
   # as you'd want it to under normal circumstances!
-  ignoreApplicationDifferences:
-  - jqPathExpressions:
-    - .spec.source.helm.parameters
+  # ignoreApplicationDifferences:
+  # - jqPathExpressions:
+  #   - .spec.source.helm.parameters
   template:
     metadata:
       name: 'nkp-pr-{{number}}'
