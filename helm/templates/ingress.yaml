@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: ngrok
   rules:
-    - host: {{ .Values.ingress.domain }}
+    - host: {{ Values.neon.branchName }}.{{ .Values.ingress.domain }}
       http:
         paths:
           - path: /
