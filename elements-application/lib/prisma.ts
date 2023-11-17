@@ -11,7 +11,7 @@ const isBuildingProduction = NEXT_PHASE === PHASE_PRODUCTION_BUILD
 
 // This will throw an error if the environment variables are missing at runtime,
 // but will not throw when compiling a production build using next
-const DATABASE_HOSTNAME = get('DATABASE_HOSTNAME').required(isProductionEnv && !isBuildingProduction).asUrlString()
+const DATABASE_HOSTNAME = get('DATABASE_HOSTNAME').required(isProductionEnv && !isBuildingProduction).asString()
 const DATABASE_PASSWORD = get('DATABASE_PASSWORD').required(isProductionEnv && !isBuildingProduction).asString()
 const DATABASE_USERNAME = get('DATABASE_USERNAME').required(isProductionEnv && !isBuildingProduction).asString()
 
