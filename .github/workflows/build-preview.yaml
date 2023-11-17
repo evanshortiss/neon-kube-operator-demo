@@ -46,7 +46,7 @@ jobs:
       uses: thollander/actions-comment-pull-request@v2
       with:
         message: |
-          :rocket: Preview URL: https://${{ steps.NGROK_SUBDOMAIN }}
+          :rocket: Preview URL: https://pr-${{github.event.number}}${{ secrets.NGROK_SUBDOMAIN }}
           :octopus: Argo CD URL: https://${{ secrets.ARGOCD_HOSTNAME }}/applications/argocd/nkp-pr-${{github.event.number}}
         # Comment tag allows the action to update an existing comment, if one
         # exists. This prevents a flood of similar comments
