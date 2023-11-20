@@ -28,3 +28,14 @@ spec:
               secretKeyRef:
                 name: neon-role
                 key: username
+          - name: DATABASE_HOSTNAME
+            valueFrom:
+              secretKeyRef:
+                # This secret is named after the Neon "Endpoint", so the
+                # "endpoint-sample" is deterministic and referencable
+                name: neon-endpoint-sample-host
+                key: host
+          - name: HOSTNAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name

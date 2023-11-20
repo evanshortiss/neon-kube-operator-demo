@@ -2,7 +2,6 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
-const title = get('')
 
 export const metadata = {
   title: 'Next.js + Prisma + Neon',
